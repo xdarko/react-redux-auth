@@ -8,9 +8,8 @@ const requireAuth = passport.authenticate('jwt', { session: false });
 // Create signin middleware with passport local strategy
 const requireSignin = passport.authenticate('local', { session: false });
 
-
 module.exports = app => {
-  app.get('/', requireAuth, (req, res) => res.json({ hi: true }));
+  app.get('/', requireAuth, (req, res) => res.json({ message: 'Authentication successfully passed' }));
   app.post('/signup', catchErrors(authController.signup));
-  app.post('/signin', requireSignin, catchErrors(authController.signin));
+  app.post('/signin', requireSignin, authController.signin);
 };

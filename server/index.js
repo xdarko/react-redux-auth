@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const { errorHandlerMiddleware } = require('./utils/error-handlers');
+const cors = require('cors');
 
 const router = require('./router');
 
@@ -16,6 +17,7 @@ mongoose.connection.on('error', (err) => console.error(`🚫🚫🚫 → ${err.m
 
 // Setup middlewares
 app.use(morgan('combined'));
+app.use(cors());
 app.use(bodyParser.json({ type: '*/*' }));
 
 // Setup routing
